@@ -106,7 +106,7 @@
       <ConformanceMode>true</ConformanceMode>
       <AdditionalHeaderUnitDependencies>
       </AdditionalHeaderUnitDependencies>
-      <AdditionalIncludeDirectories>../base-algorithms</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../base-algorithms;.</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -123,7 +123,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>../base-algorithms</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../base-algorithms;.</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -135,6 +135,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="main.cpp" />
     <ClCompile Include="main_basic.c" />
     <ClCompile Include="main_router.c" />
   </ItemGroup>
@@ -146,6 +147,9 @@
     <None Include="route_init.ini.djs" />
     <None Include="route_init.ini.pmst" />
     <None Include="route_init.ini.wiki" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="agent_defs.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
