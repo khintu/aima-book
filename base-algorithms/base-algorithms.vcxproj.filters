@@ -1,0 +1,111 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="ArraySorting.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="BellmnFrd.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="BinomialHeap.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="BSTree.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="CLList.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Convert.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Dijkstra.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="DisjointSetLL.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="DisjointSetRT.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="DLList.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="FibHeap.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Graph.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="HashMap.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="init_inet.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="LList.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="LPriorityQ.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="LQueue.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="LStack.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="MST2Graph.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="MSTGraph.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="network_lib.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="PMSTGraph.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="RBTree.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="routing_table.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Set.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SkipList.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="advncd_algo.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="c-algorithm.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="randomized.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="router_defs.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>
