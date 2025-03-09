@@ -93,6 +93,9 @@
     <ClCompile Include="SkipList.c">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Treap.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="advncd_algo.h">
