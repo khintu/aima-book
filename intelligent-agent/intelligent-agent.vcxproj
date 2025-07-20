@@ -135,6 +135,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="CAgntBase.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="main_basic.c" />
     <ClCompile Include="main_router.c" />
@@ -144,12 +145,14 @@
     <None Include="route_init.ini.1" />
     <None Include="route_init.ini.2" />
     <None Include="route_init.ini.3" />
+    <None Include="route_init.ini.bfd" />
     <None Include="route_init.ini.djs" />
     <None Include="route_init.ini.pmst" />
     <None Include="route_init.ini.wiki" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="agent_defs.h" />
+    <ClInclude Include="CAgntBase.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

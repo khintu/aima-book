@@ -24,6 +24,9 @@
     <ClCompile Include="main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="CAgntBase.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="route_init.ini">
@@ -47,9 +50,15 @@
     <None Include="route_init.ini.wiki">
       <Filter>Resource Files</Filter>
     </None>
+    <None Include="route_init.ini.bfd">
+      <Filter>Resource Files</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="agent_defs.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CAgntBase.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
