@@ -7,7 +7,7 @@ extern "C" {
 
 int main(int argc, char* argv[])
 {
-	//insert_in_main_router_unittestsuit(argc, argv);
+	insert_in_main_router_unittestsuit(argc, argv);
 
 	try {
 		

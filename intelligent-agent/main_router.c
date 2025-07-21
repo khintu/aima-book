@@ -1,4 +1,5 @@
 #include <router_defs.h>
+#include <malloc.h>
 
 extern int insert_in_main_algolib_unittestsuit(int argc, char* argv[]);
 void unit_test_network_lib(void);
@@ -11,6 +12,9 @@ void runBellmanFordAlgo(struct WLList* inetList);
 void testSkipListSuite(void);
 void testBinomialHeapSuite(void);
 void testTreapSuite(void);
+void testHashMap2(void);
+void testBucketSort(void);
+void testSelectionSort(void);
 
 /* 
 	In our implementation the Router Interface Id is a unique
@@ -40,16 +44,17 @@ int insert_in_main_router_unittestsuit(int argc, char* argv[])
 	inetList = initializeInternetMap();
 	
 	// Put your code here
-	printf("Single Source Shortest Path:\n");
+	//printf("Single Source Shortest Path:\n");
 	//runBellmanFordAlgo(inetList);
-	//testSkipListSuite();
-	//testBinomialHeapSuite();
-	testTreapSuite();
+	//testBucketSort();
+	//testSelectionSort();
+	testHashMap2();
 
 	// Delete internet graph
 	resetEverythingInIntrnt(inetList);
 	WDeleteList(inetList);
-	return 0;
+	//return 0;
+	exit(0);
 }
 #endif /* UNIT_TEST_ALGO */
 
@@ -205,6 +210,15 @@ void* WGetNthData(struct WLList* l, uint32_t n)
 	for (i = 0, p = l->head; p && i < n; p = p->next, i++)
 		;
 	return p ? p->data : NULL;
+}
+
+void WIteratorDList2(struct WDLList* l, void* arg1, void* arg2, void (*ITR)(void*, void*, void*))
+{
+	struct DLNode* p;
+
+	for (p = l->head; p; p = p->next)
+		(*ITR)(p->data, arg1, arg2);
+	return;
 }
 
 uint32_t WRandom(void)
@@ -497,5 +511,192 @@ void testTreapSuite(void)
 		WInsertInTreap(tree, Arr[i]);
 	WIterateTreap(tree, (void (*)(void*, uint32_t))printList2);
 	WDeleteTreap(tree);
+	return;
+}
+
+extern int hashFn(const char* key);
+
+static void printHashMap2(const char* key, const char* value)
+{
+	printf("Multimap: Itr Key: %s, Value: %s\n", key, value);
+	return;
+}
+
+void testHashMap2(void)
+{
+	struct WHashMap2* hmap;
+
+	printf("---Multimap/HashMap2 test suite---\n");
+	hmap = WCreateHashMap2(6, (int (*)(const void*))hashFn, (WCMPFP)strcmp, \
+				(WCTRFP)strCtor, (WDTRFP)strDtor, (WCTRFP)strCtor, (WDTRFP)strDtor);
+	
+	// Simple insert and search
+	WInsertKeyValHashMap2(hmap, "Praveen", "Masters of the Universe");
+	WInsertKeyValHashMap2(hmap, "Anastasi", "Zero of the Universe");
+	WInsertKeyValHashMap2(hmap, "Maddy", "One of the Universe");
+	printf("MultiMap: %s\n", (char*)WSearchKeyHashMap2(hmap, "Praveen"));
+	printf("MultiMap: %s\n", (char*)WSearchKeyHashMap2(hmap, "Anastasi"));
+	printf("MultiMap: %s\n", (char*)WSearchKeyHashMap2(hmap, "Maddy"));
+	printf("MultiMap: Size = %d\n", WGetSizeHashMap2(hmap));
+	WDeleteKeyHashMap2(hmap, "Praveen");
+	WDeleteKeyHashMap2(hmap, "Anastasi");
+	WDeleteKeyHashMap2(hmap, "Maddy");
+	printf("MultiMap: Size = %d\n", WGetSizeHashMap2(hmap));
+
+	// Insert same key with different values (Collison Detection)
+	WInsertKeyValHashMap2(hmap, "psingh1", "Masters of the Universe 2.0");
+	WInsertKeyValHashMap2(hmap, "psingh1", "Zero of the Universe 2.0");
+	WInsertKeyValHashMap2(hmap, "psingh1", "One of the Universe 2.0");
+	printf("MultiMap: %s\n", (char*)WSearchKeyHashMap2(hmap, "psingh1"));
+	WDeleteKeyHashMap2(hmap, "psingh1");
+	printf("MultiMap: %s\n", (char*)WSearchKeyHashMap2(hmap, "psingh1"));
+	WDeleteKeyHashMap2(hmap, "psingh1");
+	printf("MultiMap: %s\n", (char*)WSearchKeyHashMap2(hmap, "psingh1"));
+	WDeleteKeyHashMap2(hmap, "psingh1");
+	printf("MultiMap: Size = %d\n", WGetSizeHashMap2(hmap));
+
+	// Insert/Delete/Search Error handling
+	if (WESUCCESS != WDeleteKeyHashMap2(hmap, "psingh1"))
+		printf("MultiMap: Error deleteing key psingh1\n");
+	printf("MultiMap: %s\n", (char*)WSearchKeyHashMap2(hmap, "psingh1"));
+
+	WInsertKeyValHashMap2(hmap, "Praveen", "Masters of the Universe");
+	WInsertKeyValHashMap2(hmap, "Anastasi", "Zero of the Universe");
+	WInsertKeyValHashMap2(hmap, "Maddy", "One of the Universe");
+	WInsertKeyValHashMap2(hmap, "psingh1", "Masters of the Universe 2.1");
+	WInsertKeyValHashMap2(hmap, "psingh1", "Zero of the Universe 2.2");
+	WInsertKeyValHashMap2(hmap, "psingh1", "One of the Universe 2.3");
+	if (WESUCCESS != WInsertKeyValHashMap2(hmap, "prsingh", "Masters of the Universe 3.0"))
+		printf("MultiMap: Error inserting key prsingh\n");
+
+	// Multimap: Search/Iterator
+	WIteratorHashMap2(hmap, "prsingh", (void (*)(void *, void*))printHashMap2);
+	WIteratorHashMap2(hmap, "Maddy", (void (*)(void*, void*))printHashMap2);
+	WIteratorHashMap2(hmap, "psingh1", (void (*)(void*, void*))printHashMap2);
+
+	WDeleteHashMap2(hmap);
+	return;
+}
+
+#pragma warning( push )
+#pragma warning( disable : 4311 )
+#pragma warning( disable : 4312 )
+
+static int32_t* intCtor(int32_t* data)
+{
+	return data;
+}
+
+static void intDtor(int32_t* data)
+{
+	data;
+	return;
+}
+
+static int32_t intCmp(const int32_t* x, const int32_t* y)
+{
+	if ((int32_t)x > (int32_t)y)
+		return 1;
+	else if (((int32_t)x < (int32_t)y))
+		return -1;
+	else
+		return 0;
+}
+
+static void intItr(int32_t* i, int32_t arr[], int32_t* idx)
+{
+	arr[*idx] = (int32_t)i;
+	++*idx;
+	return;
+}
+
+void WBucketSort(int32_t arr[], uint32_t N, uint32_t K)
+{
+	int32_t min, max;
+	uint32_t i, j, bcktIdx;
+	struct WDLList **buckets;
+
+	for (i = 0, min = 0x7FFFFFFF; i < N; ++i)
+		min = (arr[i] < min) ? arr[i] : min;
+	for (i = 0, max = 0x10000000; i < N; ++i)
+		max = (arr[i] > max) ? arr[i] : max;
+	max += 1, min -= 1;
+
+	if ((buckets = (struct WDLList**)_malloca(sizeof * *buckets)) == NULL)
+		return;
+	for (i = 0; i < K; ++i)
+		buckets[i] = WCreateDList((WCMPFP)intCmp, (WCTRFP)intCtor, (WDTRFP)intDtor);
+	
+	for (i = 0; i < N; ++i) {
+		if (arr[i] >= 0)
+			bcktIdx = (uint32_t)(K / 2 + (floor(K / 2 * (arr[i] / max))));
+		else
+			bcktIdx = (uint32_t)(K / 2 - (floor(K / 2 * (arr[i] / min))));
+		WAppendToDList(buckets[bcktIdx], (void*)arr[i]);
+	}
+
+	for (i = 0; i < K; ++i)
+		WSortDList(buckets[i]);
+	for (i = 0, j = 0; i < K; ++i)
+		WIteratorDList2(buckets[i], (void*)arr, (void*) &j, (void (*)(void*,void*,void*))intItr);
+	for (i = 0; i < K; ++i)
+		WDeleteDList(buckets[i]);
+	return;
+}
+
+#pragma warning(pop)
+
+void testBucketSort(void)
+{
+	uint32_t i;
+	//int32_t arr[10] = { 5, 3, 6, 7, 0, -1, 4, 2, 8, 9 };
+	//int32_t arr[10] = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 };
+	//int32_t arr[10] = { 9, 8, 7, 6, 5, 4, 3, 2, 1, 0 };
+	int32_t arr[10] = { -9, -8, -7, -6, -5, 4, 3, 2, 1, 0 };
+
+	printf("---testing Bucket Sort---\n");
+
+	WBucketSort(arr, 10, 3);
+	for (i = 0; i < 10; ++i)
+		printf(((i+1) % 10) ? "%d, " : "%d\n", arr[i]);
+
+	return;
+}
+
+void WSelectionSort(int32_t arr[], uint32_t N)
+{
+	uint32_t i, j, k;
+	int32_t min;
+	
+	i = 0;
+	while (i < N) {
+		for (j = i + 1, min = 0x7FFFFFFF; j < N; ++j) {
+			if (arr[j] < min) {
+				min = arr[j];
+				k = j;
+			}
+		}
+		if (min < arr[i]) {
+			arr[k] = arr[i];
+			arr[i] = min;
+		}
+		++i;
+	}
+	return;
+}
+
+void testSelectionSort(void)
+{
+	uint32_t i;
+	//int32_t arr[10] = { 5, 3, 6, 7, 0, -1, 4, 2, 8, -9 };
+	//int32_t arr[10] = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 };
+	//int32_t arr[10] = { 9, 8, 7, 6, 5, 4, 3, 2, 1, 0 };
+	int32_t arr[10] = { -9, -8, -7, -6, -5, 4, 3, 2, 1, 0 };
+
+	printf("---testing Selection Sort---\n");
+
+	WSelectionSort(arr, 10);
+	for (i = 0; i < 10; ++i)
+		printf(((i + 1) % 10) ? "%d, " : "%d\n", arr[i]);
 	return;
 }

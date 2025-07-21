@@ -11,6 +11,7 @@ void WIteratorList2(struct WLList*, void (*)(void*, void*));
 void WIteratorList2Arg(struct WLList*, void*, void (*)(void*, void*, void*));
 void WIteratorList3(struct WLList*, void*, void (*)(void*, void*));
 void WIteratorList4(struct WLList*, void*, void*, void (*)(void*, void*, void*));
+void WIteratorDList2(struct WDLList*, void*, void*, void (*)(void*, void*, void*));
 void* WGetNthData(struct WLList*, uint32_t);
 
 /* Binomial Heap */
@@ -42,5 +43,45 @@ void* WExtractRootBnmHeap(struct WBnmHeap* hp);
 int32_t WDeleteKeyBnmHeap(struct WBnmHeap* hp, void *key);
 int32_t WUpdateKeyBnmHeap(struct WBnmHeap* hp, void* key, void* newKey);
 struct WBnmHeap* WUnionBnmHeap(struct WBnmHeap* hp1, struct WBnmHeap* hp2);
+
+/* ---Hash Map2(Open Addressing with linear probing) Dictionary ADT--- */
+
+struct KeyNode
+{
+	void* key;
+	void* value;
+};
+
+// This ADT allows duplicate keys so user must clean up all keys (multimap)
+struct WHashMap2
+{
+	struct KeyNode** table; /* dynamically allocated array of chains */
+	uint32_t tabSize;						/* Size of universal key set */
+	int (*KEYCMP)(const void*, const void*);
+	void* (*CTORK)(void* x); /* Constructor/Destructor for key/value */
+	void (*DTORK)(void* x);
+	void* (*CTORV)(void* x);
+	void (*DTORV)(void* x);
+	uint32_t (*HASHFN)(const void*); /* Hash value from a hash function */
+};
+
+struct WHashMap2* WCreateHashMap2(uint32_t tabSize, uint32_t (*HASHFN)(const void*), \
+																int32_t (*KCMP)(const void*, const void*), \
+																void* (*CTORK)(void*), \
+																void (*DTORK)(void*), \
+																void* (*CTORV)(void*), \
+																void (*DTORV)(void*));
+void WDeleteHashMap2(struct WHashMap2*);
+void* WSearchKeyHashMap2(struct WHashMap2*, void* key);
+int32_t WInsertKeyValHashMap2(struct WHashMap2* hmap, void* key, void* val);
+int32_t WDeleteKeyHashMap2(struct WHashMap2* hmap, void* key);
+uint32_t WGetSizeHashMap2(struct WHashMap2* hmap);
+void WIteratorHashMap2(struct WHashMap2* hmap, void* key, void (*fn)(void*, void*));
+
+/* ---Bucket Sorting Algorithm for integers, O(n)--- */
+void WBucketSort(int32_t arr[], uint32_t N, uint32_t K);
+
+/* ---Selection Sort for integers, O(n^2), space O(1)--- */
+void WSelectionSort(int32_t arr[], uint32_t N);
 
 #endif /* ADVNCD_ALGO_H */

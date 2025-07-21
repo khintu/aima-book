@@ -96,6 +96,9 @@
     <ClCompile Include="Treap.c">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="HashMap2.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="advncd_algo.h">
