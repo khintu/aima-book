@@ -1232,5 +1232,5 @@ int insert_in_main_algolib_unittestsuit(int argc, char* argv[])
 	// ---Runtime Analysis ---
 	t2 = clock();
 	printf("Runtime = %ld - %ld = %ld\n", t2, t1, t2 - t1);
-	return 0;
+	exit(0);
 }

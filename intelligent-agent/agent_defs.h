@@ -25,6 +25,7 @@ namespace AI {
   };
 }
 
+/* --- Class headers by order of hierarchy --- */
 #include <CAgntBase.h>
 
 #endif /* AGENT_DEFS_H */
