@@ -106,13 +106,13 @@
       <ConformanceMode>true</ConformanceMode>
       <AdditionalHeaderUnitDependencies>
       </AdditionalHeaderUnitDependencies>
-      <AdditionalIncludeDirectories>../base-algorithms;.</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../pthreads4w-code-v3.0.0;../base-algorithms;.</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>..\x64\Debug</AdditionalLibraryDirectories>
-      <AdditionalDependencies>$(CoreLibraryDependencies);%(AdditionalDependencies);base-algorithms.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>..\x64\Debug;..\..\pthreads4w-code-v3.0.0\pthreadsWin32\x64\Debug</AdditionalLibraryDirectories>
+      <AdditionalDependencies>$(CoreLibraryDependencies);%(AdditionalDependencies);base-algorithms.lib;pthreadsWin32.lib;</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -123,15 +123,15 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>../base-algorithms;.</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../pthreads4w-code-v3.0.0;../base-algorithms;.</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>..\x64\Release</AdditionalLibraryDirectories>
-      <AdditionalDependencies>$(CoreLibraryDependencies);%(AdditionalDependencies);base-algorithms.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>..\x64\Release;..\..\pthreads4w-code-v3.0.0\pthreadsWin32\x64\Release</AdditionalLibraryDirectories>
+      <AdditionalDependencies>$(CoreLibraryDependencies);%(AdditionalDependencies);base-algorithms.lib;pthreadsWin32.lib;</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>

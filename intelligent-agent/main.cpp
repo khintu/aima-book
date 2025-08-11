@@ -8,7 +8,7 @@ extern "C" {
 int main(int argc, char* argv[])
 {
 	//insert_in_main_router_unittestsuit(argc, argv);
-
+	pthread_t thread;
 	try {
 		
 		

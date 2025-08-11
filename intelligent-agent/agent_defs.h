@@ -3,6 +3,7 @@
 
 extern "C" {
 #include <router_defs.h>
+#include <pthread.h>
 }
 
 #include <iostream>
