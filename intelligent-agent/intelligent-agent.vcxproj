@@ -136,6 +136,8 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="CAgntBase.cpp" />
+    <ClCompile Include="CThrdAgent.cpp" />
+    <ClCompile Include="CThrdBase.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="main_basic.c" />
     <ClCompile Include="main_router.c" />
@@ -153,6 +155,8 @@
   <ItemGroup>
     <ClInclude Include="agent_defs.h" />
     <ClInclude Include="CAgntBase.h" />
+    <ClInclude Include="CThrdAgent.h" />
+    <ClInclude Include="CThrdBase.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
