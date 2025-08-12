@@ -11,10 +11,16 @@ int main(int argc, char* argv[])
 	
 	try {
 		
-		AI::CThrdAgent threadObj;
+		AI::CThrdAgent threadObj[4];
 
-		pthread_create(&threadObj.thread, NULL, AI::CThrdBase::threadObjectStartExecCb, &threadObj);
-		threadObj.waitToJoinWithThrd();
+		pthread_create(&threadObj[0].thread, NULL, AI::CThrdBase::threadObjectStartExecCb, &threadObj[0]);
+		pthread_create(&threadObj[1].thread, NULL, AI::CThrdBase::threadObjectStartExecCb, &threadObj[1]);
+		pthread_create(&threadObj[2].thread, NULL, AI::CThrdBase::threadObjectStartExecCb, &threadObj[2]);
+		pthread_create(&threadObj[3].thread, NULL, AI::CThrdBase::threadObjectStartExecCb, &threadObj[3]);
+		threadObj[0].waitToExit();
+		threadObj[1].waitToExit();
+		threadObj[2].waitToExit();
+		threadObj[3].waitToExit();
 	}
 	catch (AI::Exception e) {
 		cout << e << endl;

@@ -6,20 +6,7 @@ namespace AI {
 		pthread_cond_t cond;
 	public:
 		pthread_t thread;
-	protected:
-		inline void lock() {
-			pthread_mutex_lock(&mtx);
-		}
-		inline void unlock() {
-			pthread_mutex_unlock(&mtx);
-		}
-		inline void wait() {
-			pthread_cond_wait(&cond, &mtx);
-		}
-		inline void signal() {
-			pthread_cond_signal(&cond);
-		}
-	public:
+
 		CThrdBase() :mtx(PTHREAD_MUTEX_INITIALIZER), \
 								 cond(PTHREAD_COND_INITIALIZER)
 		{
@@ -31,8 +18,20 @@ namespace AI {
 			pthread_mutex_destroy(&mtx);
 			pthread_cond_destroy(&cond);
 		}
-		void waitToJoinWithThrd() {
+		inline void waitToExit() {
 			pthread_join(thread, NULL);
+		}
+		inline void lock() {
+			pthread_mutex_lock(&mtx);
+		}
+		inline void unlock() {
+			pthread_mutex_unlock(&mtx);
+		}
+		inline void wait() {
+			pthread_cond_wait(&cond, &mtx);
+		}
+		inline void signal() {
+			pthread_cond_signal(&cond);
 		}
 
 		// To be implemented by derived concrete threads
