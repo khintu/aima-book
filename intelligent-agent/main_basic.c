@@ -680,9 +680,9 @@ int UnitTestWDLListQuickSortStr(int argc, char* argv[])
 	return 0;
 }
 
-int hashFn(const char* key)
+unsigned hashFn(const char* key)
 {
-	int i, hash;
+	unsigned i, hash;
 	for (i = 0, hash = 0; key[i] != NUL; ++i)
 		hash += 31 + key[i];
 	return hash;
@@ -694,7 +694,7 @@ int UnitTestWHashMap(int argc, char* argv[])
 	struct WHashMap* hmap;
 
 	// Basic tests on insert, search, delete
-	hmap = WCreateHashMap(5, (int (*)(const void*))hashFn, (WCMPFP)strcmp, (WCTRFP)ctor, (WDTRFP)dtor, (WCTRFP)ctor, (WDTRFP)dtor);
+	hmap = WCreateHashMap(5, (unsigned (*)(const void*))hashFn, (WCMPFP)strcmp, (WCTRFP)ctor, (WDTRFP)dtor, (WCTRFP)ctor, (WDTRFP)dtor);
 	WInsertKeyValHashMap(hmap, "Praveen", "Masters of the Universe");
 	printf("HashMap: %s\n", (char*)WSearchKeyHashMap(hmap, "Praveen"));
 	WInsertKeyValHashMap(hmap, "Praveen", "Zero of the Universe");
@@ -703,7 +703,7 @@ int UnitTestWHashMap(int argc, char* argv[])
 	WDeleteHashMap(hmap);
 
 	// Complex Records for key/value
-	hmap = WCreateHashMap(5, (int (*)(const void*))hashFn, (WCMPFP)strcmp, (WCTRFP)ctor, (WDTRFP)dtor, (WCTRFP)ctorRec, (WDTRFP)dtorRec);
+	hmap = WCreateHashMap(5, (unsigned (*)(const void*))hashFn, (WCMPFP)strcmp, (WCTRFP)ctor, (WDTRFP)dtor, (WCTRFP)ctorRec, (WDTRFP)dtorRec);
 	ur.stmt = "'Veggie Lovers' is Good";
 	ur.count = 1;
 	ur.pay = 1600.0f;
@@ -717,7 +717,7 @@ int UnitTestWHashMap(int argc, char* argv[])
 	WDeleteHashMap(hmap);
 
 	// Collision handling through chaining
-	hmap = WCreateHashMap(4, (int (*)(const void*))hashFn, (WCMPFP)strcmp, (WCTRFP)ctor, (WDTRFP)dtor, (WCTRFP)ctor, (WDTRFP)dtor);
+	hmap = WCreateHashMap(4, (unsigned (*)(const void*))hashFn, (WCMPFP)strcmp, (WCTRFP)ctor, (WDTRFP)dtor, (WCTRFP)ctor, (WDTRFP)dtor);
 	WInsertKeyValHashMap(hmap, "Praveen", "Masters of the Universe");
 	printf("HashMap: %s\n", (char*)WSearchKeyHashMap(hmap, "Praveen"));
 	WInsertKeyValHashMap(hmap, "Parveen", "Zero of the Universe");

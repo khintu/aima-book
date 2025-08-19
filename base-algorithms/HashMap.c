@@ -3,7 +3,7 @@
 
 #define WHASHFUNC(key)	((*hmap->HASHFN)(key) % (hmap->tabSize))
 
-struct WHashMap* WCreateHashMap(int tabSize, int (*HASHFN)(const void*),\
+struct WHashMap* WCreateHashMap(int tabSize, unsigned (*HASHFN)(const void*),\
 																int (*KCMP)(const void*, const void*),\
 																void* (*CTORK)(void* ),\
 																void (*DTORK)(void* ),\

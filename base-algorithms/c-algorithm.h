@@ -225,10 +225,10 @@ struct WHashMap
 	void (*DTORK)(void* x);
 	void* (*CTORV)(void* x);
 	void (*DTORV)(void* x);
-	int (*HASHFN)(const void*); /* Hash value from a hash function */
+	unsigned (*HASHFN)(const void*); /* Hash value from a hash function */
 };
 
-struct WHashMap* WCreateHashMap(int tabSize, int (*HASHFN)(const void*), \
+struct WHashMap* WCreateHashMap(int tabSize, unsigned (*HASHFN)(const void*), \
 																int (*KCMP)(const void*, const void*), \
 																void* (*CTORK)(void*), \
 																void (*DTORK)(void*), \

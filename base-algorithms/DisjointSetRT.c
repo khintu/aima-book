@@ -46,7 +46,7 @@ static void DestroyNodeItr(struct MST2Vertex* v, struct DJSRtNode* rt)
 void DSJRtNodeDestroy(struct DJSRtNode* rt, struct WLList* vertices)
 {
 	/* Find vertices in the Graph which have parent as 'x', delete their DJSRtNode reference */
-	WIteratorList3(vertices, (void*)rt, DestroyNodeItr);
+	WIteratorList3(vertices, (void*)rt, (void (*)(void*, void*))DestroyNodeItr);
 	free(rt);
 	return;
 }

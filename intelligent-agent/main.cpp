@@ -22,7 +22,7 @@ int main(int argc, char* argv[])
 		threadObj[2].waitToExit();
 		threadObj[3].waitToExit();
 	}
-	catch (AI::Exception e) {
+	catch (AI::Exception& e) {
 		cout << e << endl;
 	}
 	catch (...) {

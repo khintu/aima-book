@@ -514,7 +514,7 @@ void testTreapSuite(void)
 	return;
 }
 
-extern int hashFn(const char* key);
+extern unsigned hashFn(const char* key);
 
 static void printHashMap2(const char* key, const char* value)
 {
@@ -527,7 +527,7 @@ void testHashMap2(void)
 	struct WHashMap2* hmap;
 
 	printf("---Multimap/HashMap2 test suite---\n");
-	hmap = WCreateHashMap2(6, (int (*)(const void*))hashFn, (WCMPFP)strcmp, \
+	hmap = WCreateHashMap2(6, (unsigned (*)(const void*))hashFn, (WCMPFP)strcmp, \
 				(WCTRFP)strCtor, (WDTRFP)strDtor, (WCTRFP)strCtor, (WDTRFP)strDtor);
 	
 	// Simple insert and search

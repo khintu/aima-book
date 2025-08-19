@@ -159,11 +159,11 @@ static void PrimsMSTMain(struct WLList* G)
 	struct WPAQueue* Q;
 
 	Q = WCreatePAQueue(G->count, (WCMPFP)vertexMinPQCmp, (WCTRFP)vertexMinPQCtr, (WDTRFP)vertexMinPQDtr);
-	WIteratorList3(G, (void*)Q, populateMinPQItr);
+	WIteratorList3(G, (void*)Q, (void (*)(void*, void*))populateMinPQItr);
 	while (u = WHeapExtractMaxPAQueue(Q)) { /* Read as extract from MinPQ or InvertedMaxPQ */
 		printf("MST Vertex %u\n", u->vrtxId);
 		if (u->Adj) {
-			WIteratorList4(u->Adj, (void*)Q, (void*)u, calcLightEdgesItr);
+			WIteratorList4(u->Adj, (void*)Q, (void*)u, (void (*)(void*, void*, void*))calcLightEdgesItr);
 			if (WMaximumPAQueue(Q))
 				printf("\tEdge chosen [%u-%u], weight %g\n", ((struct PMSTVertex*)WMaximumPAQueue(Q))->p->vrtxId,\
 																									((struct PMSTVertex*)WMaximumPAQueue(Q))->vrtxId,\
@@ -185,7 +185,7 @@ static void printTreeItr(struct PMSTVertex* v)
 static void printMST(struct WLList* G)
 {
 	printf("--- Printing Prims MST: ---\n");
-	WIteratorList(G, printTreeItr);
+	WIteratorList(G, (void (*)(void*))printTreeItr);
 	return;
 }
 
