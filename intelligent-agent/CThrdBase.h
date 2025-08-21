@@ -4,9 +4,9 @@ namespace AI {
 	class CThrdBase {
 		pthread_mutex_t mtx;
 		pthread_cond_t cond;
-	public:
 		pthread_t thread;
-
+	public:
+		friend class CThreadFactory;
 		CThrdBase() :mtx(PTHREAD_MUTEX_INITIALIZER), \
 								 cond(PTHREAD_COND_INITIALIZER)
 		{

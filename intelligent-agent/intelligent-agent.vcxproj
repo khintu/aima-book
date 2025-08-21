@@ -138,11 +138,14 @@
     <ClCompile Include="CAgntBase.cpp" />
     <ClCompile Include="CThrdAgent.cpp" />
     <ClCompile Include="CThrdBase.cpp" />
+    <ClCompile Include="CThreadFactory.cpp" />
+    <ClCompile Include="CVacuumWorld.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="main_basic.c" />
     <ClCompile Include="main_router.c" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Makefile" />
     <None Include="route_init.ini" />
     <None Include="route_init.ini.1" />
     <None Include="route_init.ini.2" />
@@ -154,9 +157,13 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="agent_defs.h" />
+    <ClInclude Include="CAbstractFactory.h" />
     <ClInclude Include="CAgntBase.h" />
+    <ClInclude Include="CSimpleSearching.h" />
     <ClInclude Include="CThrdAgent.h" />
     <ClInclude Include="CThrdBase.h" />
+    <ClInclude Include="CThreadFactory.h" />
+    <ClInclude Include="CVacuumWorld.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

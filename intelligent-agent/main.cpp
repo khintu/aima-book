@@ -5,22 +5,32 @@ extern "C" {
 	int insert_in_main_router_unittestsuit(int argc, char* argv[]);
 }
 
+
+using namespace AI;
+
 int main(int argc, char* argv[])
 {
 	//insert_in_main_router_unittestsuit(argc, argv);
 	
 	try {
 		
-		AI::CThrdAgent threadObj[4];
+		CAbstractFactory* factory = new CThreadFactory();
+		CSimpleSearching* agent = new CVacuumWorld();
+		CThrdBase* threadObj[4];
 
-		pthread_create(&threadObj[0].thread, NULL, AI::CThrdBase::threadObjectStartExecCb, &threadObj[0]);
-		pthread_create(&threadObj[1].thread, NULL, AI::CThrdBase::threadObjectStartExecCb, &threadObj[1]);
-		pthread_create(&threadObj[2].thread, NULL, AI::CThrdBase::threadObjectStartExecCb, &threadObj[2]);
-		pthread_create(&threadObj[3].thread, NULL, AI::CThrdBase::threadObjectStartExecCb, &threadObj[3]);
-		threadObj[0].waitToExit();
-		threadObj[1].waitToExit();
-		threadObj[2].waitToExit();
-		threadObj[3].waitToExit();
+		threadObj[0] = factory->CreateThreadObj(agent);
+		threadObj[1] = factory->CreateThreadObj(agent);
+		threadObj[2] = factory->CreateThreadObj(agent);
+		threadObj[3] = factory->CreateThreadObj(agent);
+
+
+		threadObj[0]->waitToExit(); delete threadObj[0];
+		threadObj[1]->waitToExit(); delete threadObj[1];
+		threadObj[2]->waitToExit(); delete threadObj[2];
+		threadObj[3]->waitToExit(); delete threadObj[3];
+	
+		delete factory;
+	
 	}
 	catch (AI::Exception& e) {
 		cout << e << endl;

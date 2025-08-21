@@ -3,20 +3,14 @@
 namespace AI {
 
 	class CThrdAgent: public CThrdBase {
+		CSimpleSearching* agent;
 	public:
-		CThrdAgent() : CThrdBase() {}
+		CThrdAgent(CSimpleSearching* a) : CThrdBase(), agent(a) {}
 		virtual ~CThrdAgent() {}
 		
 		// Implementations of the pure virtual methods from CThrdBase
-		void thrdInitialize() override {
-			// Initialization code for the agent thread
-		}
-		void thrdExecution() override {
-			// Execution code for the agent thread
-			cout << "Hi!, from Thread Agent!" << endl;
-		}
-		void thrdFinalize() override {
-			// Finalization code for the agent thread
-		}
+		void thrdInitialize() override ;
+		void thrdExecution() override ;
+		void thrdFinalize() override ;
 	};
 }

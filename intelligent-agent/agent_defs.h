@@ -28,7 +28,11 @@ namespace AI {
 
 /* --- Class headers by order of hierarchy --- */
 #include <CAgntBase.h>
+#include <CSimpleSearching.h>
 #include <CThrdBase.h>
 #include <CThrdAgent.h>
+#include <CAbstractFactory.h>
+#include <CThreadFactory.h>
+#include <CVacuumWorld.h>
 
 #endif /* AGENT_DEFS_H */
