@@ -7,7 +7,7 @@ CThrdBase* CThreadFactory::CreateThreadObj(CSimpleSearching *a)
 {
 	CThrdAgent* threadObj;
 	threadObj = new CThrdAgent(a);
-	pthread_create(&threadObj->thread, NULL, CThrdBase::threadObjectStartExecCb, threadObj);
+	CThrdBase::startThread(threadObj);
 	return threadObj;
 }
 

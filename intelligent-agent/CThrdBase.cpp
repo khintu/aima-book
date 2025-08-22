@@ -12,3 +12,9 @@ void* CThrdBase::threadObjectStartExecCb(void* arg) {
 
 	return NULL;
 }
+
+void CThrdBase::startThread(CThrdBase* threadObj)
+{
+	pthread_create(&threadObj->thread, NULL, CThrdBase::threadObjectStartExecCb, threadObj);
+	return;
+}
