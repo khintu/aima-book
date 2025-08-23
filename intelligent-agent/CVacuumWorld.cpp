@@ -29,8 +29,3 @@ string CVacuumWorld::serialize()
 	string s;
 	return s;
 }
-
-CAgntBase* CVacuumWorld::clone() 
-{
-	return new CVacuumWorld();
-}

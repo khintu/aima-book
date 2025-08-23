@@ -14,6 +14,5 @@ namespace AI {
 		void Execution() override;
 
 		string serialize() override;
-		CAgntBase* clone() override;
 	};
 }

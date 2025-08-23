@@ -7,7 +7,6 @@ namespace AI {
 	public:
 		CAgntBase() {}
 		virtual string serialize() = 0;
-		virtual CAgntBase* clone() = 0;
 		virtual ~CAgntBase() {}
 	};
 }
