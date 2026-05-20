@@ -83,7 +83,9 @@ struct GVertex {
 struct WLList* initializeDjGraphContainer(struct WLList*);
 void graphDijikstraCalcDistance(struct WLList*, struct WLList*, uint32_t);
 void graphTraceShortstPathFrmSrc2Trgt(struct WLList*, struct WLList*, uint32_t);
-void graphDijikstraCalcDistance2(struct WLList*, struct WLList*, uint32_t);
+//void graphDijikstraCalcDistance2(struct WLList*, struct WLList*, uint32_t);
+void graphDijikstraCalcDistance2(uint32_t local, struct WLList* grph, struct WLList* inet, \
+															   uint32_t srcRtrId, struct Router** gIntfTbl);
 
 /* Disjoint Sets, using Linked List, Amortized weigthed-union Heuristic O(m + nlgn) */
 struct DJSetNode {

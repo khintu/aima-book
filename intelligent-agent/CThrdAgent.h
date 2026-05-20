@@ -6,7 +6,7 @@ namespace AI {
 		CSimpleSearching* agent;
 	public:
 		CThrdAgent(CSimpleSearching* a) : CThrdBase(), agent(a) {}
-		virtual ~CThrdAgent() {}
+		virtual ~CThrdAgent() { delete agent; }
 		
 		// Implementations of the pure virtual methods from CThrdBase
 		void thrdInitialize() override ;

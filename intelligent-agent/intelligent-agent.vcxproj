@@ -136,6 +136,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="CAgntBase.cpp" />
+    <ClCompile Include="CSimpleSearching.cpp" />
     <ClCompile Include="CThrdAgent.cpp" />
     <ClCompile Include="CThrdBase.cpp" />
     <ClCompile Include="CThreadFactory.cpp" />

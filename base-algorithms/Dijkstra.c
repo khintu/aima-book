@@ -130,7 +130,7 @@ void graphTraceShortstPathFrmSrc2Trgt(struct WLList* grph, struct WLList* inet, 
 		printf("Tracing shortest path from target %u to source\n", trgtRtrId);
 		trgt = (struct GVertex*)trgtRtr->super;
 		do {
-			printf("AS:%u @ Distance %g\n", trgt->router->Id, trgt->distance);
+			printf("AS_TRC:%u @ Distance %g\n", trgt->router->Id, trgt->distance);
 		} while (trgt = trgt->prev);
 	}
 	return;
@@ -154,7 +154,11 @@ static void GrphDistUpdt(struct GVertex* target, struct GVertex* src)
 	return;
 }
 
-static struct GVertex* getVertexFrmNextEdge2(struct GVertex* src, int32_t* RtrIdx, struct WFibHeap* unvisitedSet)
+static struct GVertex* getVertexFrmNextEdge2(uint32_t local, \
+																						struct GVertex* src,\
+																						int32_t* RtrIdx,\
+																						struct WFibHeap* unvisitedSet,\
+																						struct Router** gIntfTbl2)
 {
 	struct GVertex* dst = NULL;
 	struct GVertex newKey = { 0 };
@@ -162,7 +166,10 @@ static struct GVertex* getVertexFrmNextEdge2(struct GVertex* src, int32_t* RtrId
 		*RtrIdx = 0;
 	}
 	else {
-		dst = gIntfTbl[src->router->FwdgTbl[*RtrIdx]->I]->super;
+		if (local == FALSE)
+			dst = gIntfTbl[src->router->FwdgTbl[*RtrIdx]->I]->super;
+		else
+			dst = gIntfTbl2[src->router->FwdgTbl[*RtrIdx]->I]->super;
 		if (dst->unvisited == TRUE) {
 			dst->unvisited = FALSE;
 			newKey.distance = src->distance + src->router->FwdgTbl[*RtrIdx]->Metric;
@@ -183,7 +190,8 @@ static struct GVertex* getVertexFrmNextEdge2(struct GVertex* src, int32_t* RtrId
 	return dst;
 }
 
-static void EachVertexDijikstra2(struct GVertex* src, struct WFibHeap* unvisitedSet)
+static void EachVertexDijikstra2(uint32_t local, struct GVertex* src,\
+																struct WFibHeap* unvisitedSet, struct Router** gIntfTbl)
 {
 	struct GVertex* dst;
 	int32_t RtrIdx;
@@ -191,7 +199,7 @@ static void EachVertexDijikstra2(struct GVertex* src, struct WFibHeap* unvisited
 	do {
 		RtrIdx = 0;
 		printf("src %d, current distance %g\n", src->router->Id, src->distance);
-		while (dst = getVertexFrmNextEdge2(src, &RtrIdx, unvisitedSet)) {
+		while (dst = getVertexFrmNextEdge2(local, src, &RtrIdx, unvisitedSet, gIntfTbl)) {
 			printf("\tdst %d, distance calctd %g\n", dst->router->Id, dst->distance);
 			RtrIdx++;
 		}
@@ -214,7 +222,8 @@ static void GrphInitItrDist(struct GVertex* v, struct WFibHeap* unvisitedSet)
 	 This makes sure that alternate paths correctly update vertices that may not yet be
 	 at optimal shortest distance from source.
 */
-void graphDijikstraCalcDistance2(struct WLList* grph, struct WLList* inet, uint32_t srcRtrId)
+void graphDijikstraCalcDistance2(uint32_t local, struct WLList* grph, struct WLList* inet,\
+																 uint32_t srcRtrId, struct Router** gIntfTbl)
 {
 	struct Router srcKey = { 0 }, * srcRtr;
 	struct GVertex* src;
@@ -229,7 +238,7 @@ void graphDijikstraCalcDistance2(struct WLList* grph, struct WLList* inet, uint3
 		src->unvisited = FALSE;
 		unvisitedSet = WCreateFibHeap((WCMPFP)GrphCmpDist, (WCTRFP)GrphCtrEmpty, (WDTRFP)GrphDtrEmpty);
 		WIteratorList3(grph, (void*)unvisitedSet, (void (*)(void*, void*))GrphInitItrDist);
-		EachVertexDijikstra2(WExtractMinFrmFibHeap(unvisitedSet), unvisitedSet);
+		EachVertexDijikstra2(local, WExtractMinFrmFibHeap(unvisitedSet), unvisitedSet, gIntfTbl);
 		WDeleteFibHeap(unvisitedSet);
 	}
 	return;

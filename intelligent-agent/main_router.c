@@ -15,6 +15,7 @@ void testTreapSuite(void);
 void testHashMap2(void);
 void testBucketSort(void);
 void testSelectionSort(void);
+void printDistance(struct GVertex* v);
 
 /* 
 	In our implementation the Router Interface Id is a unique
@@ -76,7 +77,7 @@ void runDijkstrasOSPFAlgo(struct WLList *inetList)
 {
 	struct WLList *grphList;
 	grphList = initializeDjGraphContainer(inetList);
-	graphDijikstraCalcDistance2(grphList, inetList, 1);
+	graphDijikstraCalcDistance2(FALSE, grphList, inetList, 1, NULL);
 	WIteratorList(grphList, (void (*)(void*))printDistance);
 	graphTraceShortstPathFrmSrc2Trgt(grphList, inetList, 7);
 	WDeleteList(grphList);
