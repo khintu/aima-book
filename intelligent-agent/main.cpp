@@ -10,25 +10,25 @@ using namespace AI;
 int SimpleSearchingAgent()
 {
 	struct WLList* inetList;
+	inetList = initializeInternetMap();
 
 	try {
 		CAbstractFactory* factory;
 		//CSimpleSearching* agent1, * agent2;
 		CThrdBase* threadObj[4];
 
-		inetList = initializeInternetMap();
 		factory = new CThreadFactory();
 
 		threadObj[0] = factory->CreateThreadObj(new CVacuumWorld(inetList, 1, 7));
 		threadObj[1] = factory->CreateThreadObj(new CVacuumWorld(inetList, 3, 7));
-		//threadObj[2] = factory->CreateThreadObj(agent);
-		//threadObj[3] = factory->CreateThreadObj(agent);
+		threadObj[2] = factory->CreateThreadObj(new CVacuumWorld(inetList, 5, 7));
+		threadObj[3] = factory->CreateThreadObj(new CVacuumWorld(inetList, 2, 7));
 
 
 		threadObj[0]->waitToExit(); delete threadObj[0];
 		threadObj[1]->waitToExit(); delete threadObj[1];
-		//threadObj[2]->waitToExit(); delete threadObj[2];
-		//threadObj[3]->waitToExit(); delete threadObj[3];
+		threadObj[2]->waitToExit(); delete threadObj[2];
+		threadObj[3]->waitToExit(); delete threadObj[3];
 
 		delete factory;
 	}

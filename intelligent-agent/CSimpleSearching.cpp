@@ -10,6 +10,7 @@ using namespace AI;
 
 CSimpleSearching::CSimpleSearching(struct WLList* inet):CAgntBase()
 {
+	memset(inetMap.gIntfTbl, 0x0, sizeof(inetMap.gIntfTbl));
 	buildIntrntMap(inet);
 
 	return;
